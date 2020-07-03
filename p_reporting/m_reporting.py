@@ -1,32 +1,33 @@
-import pandas as pd
 import matplotlib.pyplot as plt
-import seaborn as sns
+from matplotlib.backends.backend_pdf import PdfPages
+from p_analysis import m_analysis as man
 
 # reporting functions
 
-'''
-def visualize_barplot(df,title):
-    fig, ax = plt.subplots(figsize=(15,8))
-    chart = sns.barplot(data=df, x='Make', y='Combined MPG')
-    plt.title(title + "\n", fontsize=16)
-    return chart
 
-def visualize_lineplot(df,title):
-    fig, ax = plt.subplots(figsize=(15,8))
-    chart = sns.lineplot(data=df, x='Make', y='Combined MPG')
-    plt.title(title + "\n", fontsize=16)
-    return chart
-'''
+def input_country(countr,df):
+    if countr == "":
+        return df
+    else:
+        return df[df["Country"]==countr]
 
-def plotting_function(df,title,args):
-    fig, ax = plt.subplots(figsize=(16,8))
-    plt.title(title + "\n", fontsize=16)
-    if args.bar == True:
-        sns.barplot(data=df, x='Make', y='Combined MPG')
-        return fig
-    elif args.line == True:
-        sns.lineplot(data=df, x='Make', y='Combined MPG')
-        return fig
 
-def save_viz(fig,title):
-    fig.savefig('./data/results/' + title + '.png')
+
+def challenge1_final(mergedtable):
+    final_table = man.challenge1(mergedtable)
+    final_table.to_csv(f'data/results/challenge1.csv',index=False)
+    return final_table
+
+
+
+def top10_topdf(df):
+    top10=df.head(10)
+    fig, ax =plt.subplots(figsize=(12,4))
+    ax.axis('tight')
+    ax.axis('off')
+    the_table = ax.table(cellText=top10.values,colLabels=top10.columns,loc='center')
+    pp = PdfPages("data/results/challenge1.pdf")
+    pp.savefig(fig, bbox_inches='tight')
+    pp.close()
+    print("saving into a pdf the top10")
+    return the_table

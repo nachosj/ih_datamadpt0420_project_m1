@@ -110,3 +110,6 @@ venv.bak/
 # carpetas proyecto
 data/
 __trash__/
+
+#other stuff
+pproject nacho.ipynb
