@@ -28,8 +28,7 @@ def get_main_table(path):
     selected_columns = ["uuid", "age", "Age Group", "gender", "Country code", "Normalized Job Code"]
     df_good = df_raw[selected_columns]
     print("creating the table with the selected columns")
-    main_table = df_good
-    return main_table
+    return df_good
 
 
 

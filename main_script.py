@@ -18,8 +18,7 @@ def main(path,country):
     data_output = mre.challenge1_final(data_right)
     data_top10 = mre.top10_topdf(data_output)
     data_country = mre.input_country(country,data_output)
-
-    print(data_country)
+    print(data_country.head())
 
 
 
